@@ -5,8 +5,9 @@
   "author": "paulwerner@protonmail.com",
   "private": true,
   "scripts": {
-    "build": "babel ./src --experimental --source-maps-inline -d ./dist",
-    "start": "node ./dist/main.js"
+    "build": "babel ./src/main --experimental --source-maps-inline -d ./dist",
+    "start": "npm run-script build && node ./dist/main.js",
+    "test": "mocha --require ./src/spec/support/env --require babel-core/register ./test/spec.js"
   },
   "dependencies": {
     "express": "~4.16.3",
@@ -15,6 +16,9 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "mocha": "^5.2.0",
+    "really-need": "^1.9.2",
+    "supertest": "^3.1.0"
   }
 }
