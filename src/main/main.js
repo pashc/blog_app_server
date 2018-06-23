@@ -20,4 +20,6 @@ router.get('/', function (req, res) {
 app.use('/api', router);
 
 // START SERVER ON PORT
-app.listen(port);
+const server = app.listen(port);
+
+module.exports = server;

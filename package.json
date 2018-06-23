@@ -7,7 +7,7 @@
   "scripts": {
     "build": "babel ./src/main --experimental --source-maps-inline -d ./dist",
     "start": "npm run-script build && node ./dist/main.js",
-    "test": "mocha --require ./src/spec/support/env --require babel-core/register ./test/spec.js"
+    "test": "mocha --require ./src/spec/support/env --require babel-core/register ./src/spec/spec.js"
   },
   "dependencies": {
     "express": "~4.16.3",
