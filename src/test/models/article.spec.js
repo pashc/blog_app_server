@@ -1,14 +1,5 @@
 const expect = require('chai').expect,
-  Article = require('../../main/models/article'),
-  mongomock = require('../support/mongomock')
-
-before(async () => {
-  await mongomock.setup()
-})
-
-after(async () => {
-  await mongomock.teardown()
-})
+  Article = require('../../main/models/article')
 
 describe('test article', () => {
 
