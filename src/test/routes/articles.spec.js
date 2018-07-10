@@ -39,6 +39,7 @@ describe('Test requesting articles', () => {
     request
       .get('/api/articles')
       .expect(200)
+      .expect('Content-Type', 'application/json; charset=utf-8')
       .expect((res) => {
         expect(res.body.length).to.be.eq(2)
         expect(res.body[0].author).to.be.eq('author1')
@@ -57,6 +58,7 @@ describe('Test requesting articles', () => {
     request
       .get('/api/articles/some-awesome-title-2')
       .expect(200)
+      .expect('Content-Type', 'application/json; charset=utf-8')
       .expect((res) => {
         expect(res.body.author).to.be.eq('author2')
         expect(res.body.slug).to.be.eq('some-awesome-title-2')
@@ -70,6 +72,7 @@ describe('Test requesting articles', () => {
     request
       .get('/api/articles/unknown-slug')
       .expect(404)
+      .expect('Content-Type', 'application/json; charset=utf-8')
       .expect((res) => {
         expect(res.body.error).to.be.eq('article could not be found')
       })
