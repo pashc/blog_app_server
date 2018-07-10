@@ -32,12 +32,14 @@ mongoose.connect(db_url)
 // =================================================
 
 const router = express.Router()
+const articles = require('./routes/articles')
 
 router.get('/', function (req, res) {
   res.json({message: 'Hello World!'})
 })
 
 app.use('/api', router)
+app.use('/api', articles)
 
 // =================================================
 //                      Start Server
