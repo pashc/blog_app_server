@@ -23,7 +23,6 @@
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
-    "mockgoose": "^7.3.5",
     "really-need": "^1.9.2",
     "supertest": "^3.1.0"
   }
