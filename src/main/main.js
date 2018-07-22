@@ -1,16 +1,13 @@
+import articles from './routes/articles'
 import bodyParser from 'body-parser'
 import express from 'express'
-import fs from 'fs'
-import path from 'path'
 import mongoose from 'mongoose'
-import morgan from 'morgan'
-
+import loggers from './loggers'
 // =================================================
 //                      Config
 // =================================================
 
-const node_env = process.env.NODE_ENV || 'dev',
-  port = process.env.SERVER_PORT || 3000,
+const port = process.env.SERVER_PORT || 3000,
   db_host = process.env.DB_HOST || 'localhost',
   db_port = process.env.DB_PORT || 27017,
   database = process.env.DATABASE || 'blog'
@@ -32,29 +29,14 @@ mongoose.connect(db_url)
   })
 
 // request logging
-let flag,
-  log_dir
-
-if ('dev' !== node_env) {
-  log_dir = path.join(process.cwd(), 'log/access.log')
-  flag = 'a'
-  app.use(morgan('combined'))
-
-} else {
-  log_dir = path.join(process.cwd(), 'log/dev/access.log')
-  flag = 'w'
-  app.use(morgan('dev'))
-}
-
-app.use(morgan('common', {stream: fs.createWriteStream(log_dir, {flags: flag})}))
-
+app.use(loggers.consoleRequestLogger)
+app.use(loggers.fileRequestLogger)
 
 // =================================================
 //                      Routes
 // =================================================
 
 const router = express.Router()
-const articles = require('./routes/articles')
 
 router.get('/', function (req, res) {
   res.json({message: 'Hello World!'})
@@ -67,6 +49,7 @@ app.use('/api', articles)
 //                      Start Server
 // =================================================
 
+loggers.infoLog.info(`starting server on port=[${port}]`)
 const server = app.listen(port)
 
 module.exports = server
