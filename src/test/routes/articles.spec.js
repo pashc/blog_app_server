@@ -34,6 +34,9 @@ describe('Test requesting articles', () => {
     server = require('../../main/main')
     request = supertest.agent(server)
   })
+  after((done) => {
+    server.close(done)
+  })
 
   it('should return all articles', (done) => {
     request

@@ -3,7 +3,7 @@ const expect = require('chai').expect,
 
 describe('test article', () => {
 
-  it('should throw error on empty article', function (done) {
+  it('should throw error on empty article', (done) => {
     // given
     let article = new Article()
 
